@@ -20,10 +20,6 @@ a {
   color: var(--color-light);
   text-decoration: none;
 }
-a:hover {
-  color: var(--color-light);
-  text-decoration: none;
-}
 h1, h2, h3, h4, h5, h6, p, a {
   margin-top: 0;
   margin-bottom: 0;
@@ -55,6 +51,48 @@ body::-webkit-scrollbar-thumb {
   --color-yellow-active: #9e9402;
 }
 
+/* Global Variables */
+.title {
+  font-family: var(--font-title);
+}
+
+/* Animations */
+.item_hover {
+  transition: 0.25s;
+}
+.item_hover:hover {
+  transform: translateY(-0.25em);
+  cursor: pointer;
+}
+.item_hover:active {
+  transform: translateY(-0.5em);
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.line_hover span {
+  position: relative;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+.line_hover span:before,
+.line_hover span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  background-color: var(--color-dark);
+  transition: all 0.2s ease;
+}
+.line_hover span:after {
+  width: 0%;
+  height: 2px;
+}
+.line_hover span:hover:after {
+  width: 100%;
+}
+
+/* Fonts */
 @font-face {
   font-family: 'Gagalin';
   src: url(../fonts/gagalin.otf);

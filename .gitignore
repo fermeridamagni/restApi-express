@@ -3,3 +3,6 @@
 
 # Environment Variables
 .env
+
+# Windows
+desktop.ini
