@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>App Tasks | Expess JS</title>
+
+  <%- include('partials/head') %>
+
+  <link rel="stylesheet" href="/styles/register.css">
+<body>
+  <header>
+    <div>
+      <h1 class="title">APP TASKS by <a href="https://github.com/fermeridamagni" target="_blank" class="line_hover"><span class="title">@fermeridamagni</span></a></h1>
+    </div>
+    <div class="options">
+      <a href="/login" class="line_hover"><span><i class="fa-solid fa-right-to-bracket"></i> Login</span></a>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <form action="/register" method="post">
+        <div>
+          <h2 class="title">Create your account!</h2>
+        </div>
+        <div class="inputs">
+          <div class="group_inputs">
+            <div>
+              <i class='fa-solid fa-user'></i> 
+            </div>
+            <div>
+              <input type="text" name="first_name" placeholder="First Name:">
+            </div>
+            <div>
+              <input type="text" name="last_name" placeholder="Last Name:">
+            </div>
+          </div>
+          <div class="group_inputs">
+            <div>
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <input type="text" name="email" placeholder="Email:" class="input-lg">
+            </div>
+          </div>
+          <div class="group_inputs">
+            <div>
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <div>
+              <input type="password" name="password" id="password" placeholder="Password:" class="input-lg">
+            </div>
+            <div>
+              <button class="btn btn-dark btn-sm" type="button" onclick="showPassword()" id="btnPassword"><i class="fa-solid fa-eye"></i></button>
+            </div>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-dark"><i class="fa-solid fa-right-to-bracket"></i> Register</button>
+          </div>
+        </div>
+        <div>
+          <p>Or login with an existing account <i class="fa-solid fa-arrow-turn-down"></i></p>
+          <a href="/login" class="btn btn-dark btn-sm"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <%- include('partials/footer_main') %>
+  </footer>
+
+  <!-- Scripts -->
+  <%- include('partials/scripts') %>
+</body>
+</html>

@@ -63,5 +63,6 @@ app.set('views', path.join(__dirname, '../public/views'));
 
 // Routes Settings 
 app.use('/', require('../routes/index.routes'));
+app.use('/', require('../routes/authentication.routes'));
 
 module.exports = app;

@@ -7,10 +7,10 @@ const router = Router();
 
 // Register
 router.post('/register', [
-  body('first_name').exists(),
-  body('last_name').exists(),
+  body('first_name').exists().isLength({ min: 1 }),
+  body('last_name').exists().isLength({ min: 1 }),
   body('email').exists().isEmail(),
-  body('password').exists()
+  body('password').exists().isLength({ min: 1 }),
 ], async (req, res) => {
   const errors = validationResult(req);
 
@@ -21,23 +21,32 @@ router.post('/register', [
     last_name,
     email,
     password
-  }
+  };
 
   if (!errors.isEmpty()) {
     res.redirect('/register');
   } else {
-    await connection.query('INSERT INTO users SET ?', data, (err, result) => {
-      if (err) {
-        res.json({ err });
-      } else {
-        console.log(result);
-        res.redirect('/dashboard');
-      };
-    });
+    if (req.session.user) {
+      req.redirect('/dashboard');
+    } else {
+      await connection.query('INSERT INTO users SET ?', data, (err, result) => {
+        if (err) {
+          res.json({ err });
+        } else {
+          req.session.user = {
+            first_name,
+            last_name,
+            email,
+            password
+          };
+          res.redirect('/dashboard');
+        };
+      });
+    };
   };
 });
 
-// Login
+// LogIn
 router.post('/login', [
   body('email').exists().isEmail(),
   body('password').exists().isLength({ min: 10 })
@@ -49,28 +58,49 @@ router.post('/login', [
   if (!errors.isEmpty()) {
     res.redirect('/login');
   } else {
-    await connection.query('SELECT * FROM users WHERE email = ? and password = ?', [email, password], (err, result) => {
-      if (err) {
-        res.json({ err });
-        return;
-      } else {
-        if (result.length === 0) {
-          res.redirect('/login');
+    if (req.session.user) {
+      res.redirect('/dashboard');
+    } else {
+      await connection.query('SELECT * FROM users WHERE email = ? and password = ?', [email, password], (err, result) => {
+        if (err) {
+          res.json({ err });
+          return;
         } else {
-          const user = result[0];
-
-          if (user.email === email && user.password === password) {
-            req.session.user = {
-              name: user.full_name,
-              email: user.email,
-              password: user.password
-            };
-          } else {
+          if (result.length === 0) {
             res.redirect('/login');
+          } else {
+            const user = result[0];
+  
+            if (user.email === email && user.password === password) {
+              req.session.user = {
+                name: user.full_name,
+                email: user.email,
+                password: user.password
+              };
+  
+            res.redirect('/dashboard');
+            } else {
+              res.redirect('/login');
+            };
           };
         };
+      });
+    };
+  };
+});
+
+// logOut
+router.get('/logOut', (req, res) => {
+  if (req.session.user) {
+    req.session.destroy((error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        res.redirect('/login');
       };
     });
+  } else {
+    res.redirect('/login');
   };
 });
 

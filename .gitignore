@@ -1,8 +1,8 @@
-# Dependencies
+# dependencies
 /node_modules
 
-# Environment Variables
+# environment Variables
 .env
 
-# Windows
+# windows
 desktop.ini
