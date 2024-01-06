@@ -7,20 +7,15 @@
 
   <link rel="stylesheet" href="/styles/register.css">
 <body>
-  <header>
-    <div>
-      <h1 class="title">APP TASKS by <a href="https://github.com/fermeridamagni" target="_blank" class="line_hover"><span class="title">@fermeridamagni</span></a></h1>
-    </div>
-    <div class="options">
-      <a href="/login" class="line_hover"><span><i class="fa-solid fa-right-to-bracket"></i> Login</span></a>
-    </div>
+  <header class="w-full">
+    <%- include('partials/header_main') %>
   </header>
 
-  <main>
+  <main class="w-full min-h-screen flex justify-center items-center bg-gradient-to-r from-white-primary to-gray-primary animate-fade">
     <div class="card">
       <form action="/register" method="post">
         <div>
-          <h2 class="title">Create your account!</h2>
+          <h2 class="text-4xl font-title">Create your account!</h2>
         </div>
         <div class="inputs">
           <div class="group_inputs">
@@ -57,15 +52,19 @@
             <button type="submit" class="btn btn-dark"><i class="fa-solid fa-right-to-bracket"></i> Register</button>
           </div>
         </div>
-        <div>
-          <p>Or login with an existing account <i class="fa-solid fa-arrow-turn-down"></i></p>
-          <a href="/login" class="btn btn-dark btn-sm"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <div class="flex flex-col gap-2">
+          <div>
+            <p>Or login as an existing account <i class="fa-solid fa-arrow-turn-down"></i></p>
+          </div>
+          <div>
+            <a href="/login" class="btn btn-dark btn-sm"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+          </div>
         </div>
       </form>
     </div>
   </main>
 
-  <footer>
+  <footer class="w-full h-auto bg-black flex flex-col justify-center items-center text-white relative z-20">
     <%- include('partials/footer_main') %>
   </footer>
 

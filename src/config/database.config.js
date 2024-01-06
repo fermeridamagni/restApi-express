@@ -1,19 +1,11 @@
-const mysql = require('mysql');
+const mysql = require('mysql2/promise');
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT
-});
-
-connection.connect((err) => {
-  if (err) {
-    console.log('Error connecting to: ' + process.env.DB_HOST + ' : ' + err.message);
-  } else {
-    console.log('Connected to: ' + process.env.DB_HOST + ' -> ' + process.env.DB_NAME);
-  };
+const connection = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS|| 'root123',
+  database: process.env.DB_NAME || 'restapiexpress',
+  port: process.env.DB_PORT || 3306
 });
 
 module.exports = connection;

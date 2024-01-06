@@ -1,33 +1,33 @@
-const { Router } = require('express');
+const { Router } = require("express");
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.render('index');
+router.get("/", (req, res) => {
+  res.render("index");
 });
 
-router.get('/register', (req, res) => {
+router.get("/register", (req, res) => {
   if (req.session.user) {
-    res.redirect('/dashboard');
+    res.redirect("/dashboard");
   } else {
-    res.render('register');
-  };
+    res.render("register");
+  }
 });
 
-router.get('/login', (req, res) => {
+router.get("/login", (req, res) => {
   if (req.session.user) {
-    res.redirect('/dashboard');
+    res.redirect("/dashboard");
   } else {
-    res.render('login');
-  };
+    res.render("login");
+  }
 });
 
-router.get('/dashboard', (req, res) => {
+router.get("/dashboard", (req, res) => {
   if (req.session.user) {
-    res.render('dashboard');
+    res.render("dashboard");
   } else {
-    res.redirect('/login');
-  };
+    res.redirect("/login");
+  }
 });
 
 module.exports = router;

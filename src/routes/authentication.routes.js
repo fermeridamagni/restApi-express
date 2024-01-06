@@ -1,107 +1,118 @@
-const { Router } = require('express');
-const { body, validationResult } = require('express-validator');
+const { Router } = require("express");
+const { body, validationResult } = require("express-validator");
 
-const connection = require('../config/database.config');
+const connection = require("../config/database.config");
 
 const router = Router();
 
 // Register
-router.post('/register', [
-  body('first_name').exists().isLength({ min: 1 }),
-  body('last_name').exists().isLength({ min: 1 }),
-  body('email').exists().isEmail(),
-  body('password').exists().isLength({ min: 1 }),
-], async (req, res) => {
-  const errors = validationResult(req);
+router.post(
+  "/register",
+  [
+    body("first_name").exists().isLength({ min: 1 }),
+    body("last_name").exists().isLength({ min: 1 }),
+    body("email").exists().isEmail(),
+    body("password").exists().isLength({ min: 1 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
 
-  const { first_name, last_name, email, password } = req.body;
+    const { first_name, last_name, email, password } = req.body;
 
-  const data = {
-    first_name,
-    last_name,
-    email,
-    password
-  };
+    const data = {
+      first_name,
+      last_name,
+      email,
+      password,
+    };
 
-  if (!errors.isEmpty()) {
-    res.redirect('/register');
-  } else {
-    if (req.session.user) {
-      req.redirect('/dashboard');
+    if (!errors.isEmpty()) {
+      res.redirect("/register");
     } else {
-      await connection.query('INSERT INTO users SET ?', data, (err, result) => {
-        if (err) {
-          res.json({ err });
-        } else {
+      if (req.session.user) {
+        req.redirect("/dashboard");
+      } else {
+        try {
+          await connection.query("INSERT INTO users SET ?", [data]);
+
           req.session.user = {
             first_name,
             last_name,
             email,
-            password
+            password,
           };
-          res.redirect('/dashboard');
-        };
-      });
-    };
-  };
-});
+
+          res.redirect("/dashboard");
+        } catch (err) {
+          console.log(err);
+
+          res.json({ err });
+        }
+      }
+    }
+  }
+);
 
 // LogIn
-router.post('/login', [
-  body('email').exists().isEmail(),
-  body('password').exists().isLength({ min: 10 })
-], async (req, res) => {
-  const errors = validationResult(req);
+router.post(
+  "/login",
+  [
+    body("email").exists().isEmail(),
+    body("password").exists().isLength({ min: 10 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
 
-  const { email, password } = req.body;
+    const { email, password } = req.body;
 
-  if (!errors.isEmpty()) {
-    res.redirect('/login');
-  } else {
-    if (req.session.user) {
-      res.redirect('/dashboard');
+    if (!errors.isEmpty()) {
+      res.redirect("/login");
     } else {
-      await connection.query('SELECT * FROM users WHERE email = ? and password = ?', [email, password], (err, result) => {
-        if (err) {
-          res.json({ err });
-          return;
-        } else {
-          if (result.length === 0) {
-            res.redirect('/login');
+      if (req.session.user) {
+        res.redirect("/dashboard");
+      } else {
+        try {
+          const [rows] = await connection.query(
+            "SELECT * FROM users WHERE email = ? and password = ?",
+            [email, password]
+          );
+
+          if (rows.length === 0) {
+            res.redirect("/login");
           } else {
-            const user = result[0];
-  
-            if (user.email === email && user.password === password) {
-              req.session.user = {
-                name: user.full_name,
-                email: user.email,
-                password: user.password
-              };
-  
-            res.redirect('/dashboard');
-            } else {
-              res.redirect('/login');
+            const user = rows[0];
+
+            req.session.user = {
+              name: user.full_name,
+              email: user.email,
+              password: user.password,
             };
-          };
-        };
-      });
-    };
-  };
-});
+
+            res.redirect("/dashboard");
+          }
+        } catch (err) {
+          console.log(err);
+
+          res.json({ err });
+        }
+      }
+    }
+  }
+);
 
 // logOut
-router.get('/logOut', (req, res) => {
+router.get("/logOut", (req, res) => {
   if (req.session.user) {
     req.session.destroy((error) => {
       if (error) {
         console.error(error);
       } else {
-        res.redirect('/login');
-      };
+        res.redirect("/login");
+      }
     });
   } else {
-    res.redirect('/login');
-  };
+    res.redirect("/login");
+  }
 });
 
 module.exports = router;

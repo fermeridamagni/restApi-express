@@ -4,23 +4,16 @@
   <title>App Tasks | Expess JS</title>
 
   <%- include('partials/head') %>
-
-  <link rel="stylesheet" href="/styles/dashboard.css">
 <body>
-  <header>
-    <div>
-
-    </div>
-    <div class="options">
-      <a href="/logOut" class='line_hover'><span><i class="fa-solid fa-right-from-bracket"></i> LogOut</span></a>
-    </div>
+  <header class="w-full">
+    <%- include('partials/header_main') %>
   </header>
 
-  <main>
+  <main class="w-full min-h-screen bg-gradient-to-r from-white-primary to-gray-primary animate-fade py-[100px] flex justify-center items-center">
 
   </main>
 
-  <footer>
+  <footer class="w-full h-auto bg-black flex flex-col justify-center items-center text-white relative z-20">
     <%- include('partials/footer_main') %>
   </footer>
 

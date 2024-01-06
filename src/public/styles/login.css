@@ -1,57 +1,22 @@
-/* Header */
-header {
-  width: 100%;
-  height: auto;
-  padding: 10px 50px;
-  background-color: transparent;
-  backdrop-filter: blur(10px);
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
-}
-header .options {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
 /* Main */
-main {
-  width: 100%;
-  height: 100%;
-  min-width: 800px;
-  min-height: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgb(237,237,237);
-  background: linear-gradient(180deg, rgba(237,237,237,1) 0%, rgba(237,237,237,1) 35%, rgba(196,196,196,1) 100%);
-}
 main .card {
   width: 600px;
   height: 500px;
   background-color: transparent;
   backdrop-filter: blur(5px);
   border-radius: 10px;
-  border: 1px solid rgba(196,196,196,1);
+  border: 1px solid rgba(196, 196, 196, 1);
   border-radius: 10px;
-  background: linear-gradient(130deg, rgba(237,237,237,1) 0%, rgba(237,237,237,1) 38%, rgba(196,196,196,1) 100%);
+  background: linear-gradient(
+    130deg,
+    rgba(237, 237, 237, 1) 0%,
+    rgba(237, 237, 237, 1) 38%,
+    rgba(196, 196, 196, 1) 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-}
-main .card h1, h2, h3, h4, h5, h6, p, a, span {
-  color: var(--color-dark);
-}
-main .card a .fa-solid {
-  color: var(--color-light);
-}
-main .card button .fa-solid {
-  color: var(--color-light);
 }
 main .card form {
   width: 100%;
@@ -66,7 +31,7 @@ main .card input {
   padding: 8px;
   border-radius: 10px;
   background-color: transparent;
-  border: 1px solid rgba(196,196,196,1);
+  border: 1px solid rgba(196, 196, 196, 1);
 }
 main .card .input-lg {
   width: 300px;
@@ -84,30 +49,4 @@ main .card .group_inputs {
   gap: 10px;
   justify-content: center;
   align-items: center;
-}
-
-/* Footer */
-footer {
-  width: 100%;
-  height: auto;
-  background-color: transparent;
-  backdrop-filter: blur(10px);
-  position: fixed;
-  bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-footer .group2 {
-  width: 600px;
-  display: flex;
-  padding: 10px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid var(--color-dark);
-}
-footer p {
-  color: var(--color-dark);
 }

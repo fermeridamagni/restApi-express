@@ -1,4 +1,4 @@
-# Template to create Express applications fast and easy by **@fermeridamagni**
+# RestAPI in ExpressJS
 
 This project is a Example for REST-API in Express, using MYSQL as Database.
 
@@ -9,13 +9,12 @@ This project is a Example for REST-API in Express, using MYSQL as Database.
 * express-mysql-session,
 * express-session,
 * express-validator,
-* mysql,
+* mysql2,
 * ejs,
 * nodemon,
 * morgan,
 * dotenv,
 * uuid
-
 
 @ **Magni Developer**
 

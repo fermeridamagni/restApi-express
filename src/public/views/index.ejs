@@ -5,33 +5,28 @@
 
   <%- include('partials/head') %>
 
-  <link rel="stylesheet" href="/styles/index.css">
-<body>
-  <header>
+<body class="w-full h-full bg-gradient-to-r from-white-primary to-gray-primary">
+  <header class="w-full">
     <%- include('partials/header_main') %>
   </header>
 
-  <main>
-    <div class="card">
-      <div class="card_header">
-        <h2 class="title">App Tasks built with <a href="https://expressjs.com" target="_blank" class="line_hover"><span class="title">Expess JS!</span></a></h2>
+  <main class="w-full min-h-screen bg-gradient-to-r from-white-primary to-gray-primary animate-fade py-[100px] flex justify-center items-center">
+    <div class="max-w-[500px] bg-white p-5 shadow-lg rounded-lg flex flex-col justify-center items-center gap-4">
+      <div>
+        <h2 class="text-3xl">App Tasks built with Expess JS!</h2>
       </div>
-      <div class="card_body">
+      <div>
         <div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit in, vel aliquam libero totam atque eveniet praesentium! Asperiores quidem ipsam, at repudiandae voluptatum vitae fugit beatae aperiam veritatis, ullam dolores odit saepe alias, quis nesciunt. Assumenda laudantium saepe nihil minus quaerat laboriosam, quis adipisci sint. Eligendi, illo ad. Explicabo, nihil!
-          </p>
-        </div>
-        <div>
-          <img src="/images/app-tasks-preview.png" alt="App Tasks Preview">
+          <p>Bienvenido a RestAPI en ExpressJS, tu puente seguro para la transferencia de datos en entornos web construidos sobre la potente plataforma ExpressJS. Esta API ha sido meticulosamente diseñada para ofrecer una conectividad segura y eficiente entre tus aplicaciones, aprovechando la flexibilidad y robustez de ExpressJS.</p>
         </div>
       </div>
-      <div class="card_footer">
+      <div>
         <a href="/register" class="btn btn-dark">Get started <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
   </main>
 
-  <footer>
+  <footer class="w-full h-auto bg-black flex flex-col justify-center items-center text-white relative z-20">
     <%- include('partials/footer_main') %>
   </footer>
 
